@@ -1,4 +1,10 @@
-First, run the development server:
+How to run the Application:
+
+Run npm install to install all required dependencies
+```bash
+npm install
+```
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -10,4 +16,4 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
