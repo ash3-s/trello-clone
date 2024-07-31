@@ -33,7 +33,7 @@ const Login = ({ component: Component, ...rest }) => {
         setEmail(value);
         setFormErrors((prevErrors) => ({
           ...prevErrors,
-          [name]: `Email must contain "@" symbol and ".com"`,
+          [name]: 'Email must contain "@" symbol and ".com"',
         }));
       } else {
         setEmail(value);

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { googleProvider } from "./config/firebase";
 import {
@@ -18,6 +18,7 @@ import "./login.css";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Signup = ({ component: Component, ...rest }) => {
   const [email, setEmail] = useState("");
@@ -27,6 +28,15 @@ const Signup = ({ component: Component, ...rest }) => {
   const router = useRouter();
   const auth = getAuth();
   const userr = auth.currentUser;
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push("/tasks");
+      }
+    });
+    return unsubscribe;
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

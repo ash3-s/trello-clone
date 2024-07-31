@@ -54,3 +54,14 @@ export const Handlelogin = async () => {
   });
   return unsubscribe;
 };
+
+export const checkUser = async (auth) => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return unsubscribe;
+};

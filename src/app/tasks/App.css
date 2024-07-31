@@ -22,6 +22,7 @@
 
 .task {
   background: #f4f4f4;
+  text-color: black;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -35,5 +36,5 @@
 .task p {
   margin: 0;
   font-size: 0.9em;
-  color: #666;
+  color: #000;
 }
