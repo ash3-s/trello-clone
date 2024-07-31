@@ -7,7 +7,6 @@ import { redirect } from "next/navigation";
 import { auth, checkUser } from "../config/firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import Auth from "./Auth";
 import Protected from "./Protected";
 
 const initialTasks = {
