@@ -15,6 +15,9 @@ import { getAuth } from "firebase/auth";
 import { Handlelogin } from "./config/firebase";
 import GoogleIcon from "@mui/icons-material/Google";
 import "./login.css";
+
+import "./App.css";
+import "./Modal.css";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

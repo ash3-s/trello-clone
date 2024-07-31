@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import "./App.css";
+import "../App.css";
 import Modal from "./Modal";
 import { redirect } from "next/navigation";
 import { auth, checkUser } from "../config/firebase";
@@ -20,6 +20,8 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
+  const [taskToView, setTaskToView] = useState(null);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
 
   const router = useRouter();
   const isAuth = checkUser(auth);
@@ -181,8 +183,12 @@ function App() {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                           >
-                            <h3>{task.name}</h3>
-                            <p>{task.description}</p>
+                            <h3 style={{ color: "black" }}>{task.name}</h3>
+                            <p>
+                              {task.description.length > 25
+                                ? task.description.substring(0, 50) + "..."
+                                : task.description}
+                            </p>
                             <button
                               onClick={() => handleDeleteTask(column, task.id)}
                             >
@@ -195,6 +201,14 @@ function App() {
                               }}
                             >
                               Edit
+                            </button>
+                            <button
+                              onClick={() => {
+                                setTaskToView({ ...task });
+                                setIsViewModalOpen(true);
+                              }}
+                            >
+                              View Details
                             </button>
                           </div>
                         )}
@@ -227,6 +241,13 @@ function App() {
             }}
             initialName={taskToEdit.name}
             initialDescription={taskToEdit.description}
+          />
+        )}
+        {isViewModalOpen && taskToView && (
+          <Modal
+            onClose={() => setIsViewModalOpen(false)}
+            isViewMode={true}
+            task={taskToView}
           />
         )}
       </Protected>
