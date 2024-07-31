@@ -1,0 +1,39 @@
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.column {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+  margin: 0 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.task {
+  background: #f4f4f4;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.task h3 {
+  margin: 0 0 5px;
+}
+
+.task p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #666;
+}

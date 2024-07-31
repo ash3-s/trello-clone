@@ -1,25 +1,23 @@
 "use client";
-import Image from "next/image";
-import styles from "./page.module.css";
-
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { googleProvider } from "./config/firebase";
+import { googleProvider } from "../config/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+
 import { getAuth } from "firebase/auth";
-import { Handlelogin } from "./config/firebase";
+import { Handlelogin } from "../config/firebase";
+import "../login.css";
 import GoogleIcon from "@mui/icons-material/Google";
-import "./login.css";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const Signup = ({ component: Component, ...rest }) => {
+const Login = ({ component: Component, ...rest }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formErrors, setFormErrors] = useState({});
@@ -62,22 +60,6 @@ const Signup = ({ component: Component, ...rest }) => {
     }
   };
 
-  const signIn = async (e) => {
-    if (!(formErrors.email || formErrors.password)) {
-      e.preventDefault();
-      try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        router.push("/tasks");
-        Handlelogin();
-      } catch (error) {
-        alert("Invalid login credentials!");
-        console.error();
-      }
-    } else {
-      alert("Invalid login credentials!");
-    }
-  };
-
   const signInWithGoogle = async (e) => {
     if (!(formErrors.email || formErrors.password)) {
       e.preventDefault();
@@ -94,8 +76,27 @@ const Signup = ({ component: Component, ...rest }) => {
     }
   };
 
+  const login = async (e) => {
+    if (!(formErrors.email || formErrors.password)) {
+      e.preventDefault();
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        router.push("/tasks");
+      } catch (error) {
+        alert("Invalid login credentials!");
+        console.error();
+      }
+    } else {
+      alert("Invalid login credentials!");
+    }
+  };
+
   const navigatetohome = () => {
     // navigate("/");
+  };
+
+  const navigatetosignup = () => {
+    // navigate("/signup");
   };
 
   return (
@@ -106,7 +107,7 @@ const Signup = ({ component: Component, ...rest }) => {
         </div>
       </nav>
       <div className="login-box">
-        <p>Sign Up</p>
+        <p>Login</p>
         <form>
           <div className="user-box">
             <input
@@ -138,24 +139,24 @@ const Signup = ({ component: Component, ...rest }) => {
               </div>
             )}
           </div>
-          <button className="btttn" onClick={signIn}>
+          <button className="btttn" onClick={login}>
             Submit
           </button>
           <div className="bttn">
             <button onClick={signInWithGoogle}>
-              <GoogleIcon /> Sign up with Google
+              <GoogleIcon /> Sign in with Google
             </button>
           </div>
         </form>
         <p>
-          Already have an account?
-          <Link href="/login" className="signup">
+          Don't have an account?
+          <Link href="/" className="signup" onClick={navigatetosignup}>
             {" "}
-            Login!
+            Sign up!
           </Link>
         </p>
       </div>
     </div>
   );
 };
-export default Signup;
+export default Login;
