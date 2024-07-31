@@ -24,12 +24,14 @@ function App() {
 
   const router = useRouter();
   const isAuth = checkUser(auth);
-  console.log(isAuth);
+  // console.log(isAuth);
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch("http://localhost:8000/getTasks"); //API endpoint
+        const response = await fetch(
+          "https://task-server-rouge.vercel.app/getTasks"
+        ); //API endpoint
         const data = await response.json();
         console.log(data);
         setTasks(data);
@@ -64,7 +66,7 @@ function App() {
         [destColumn]: destTasks,
       });
 
-      await fetch("http://localhost:8000/updateTasks", {
+      await fetch("https://task-server-rouge.vercel.app/updateTasks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,13 +77,16 @@ function App() {
   };
 
   const handleAddTask = async (name, description) => {
-    const response = await fetch("http://localhost:8000/addTask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, description }),
-    });
+    const response = await fetch(
+      "https://task-server-rouge.vercel.app/addTask",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, description }),
+      }
+    );
 
     const data = await response.json();
     console.log(data);
@@ -105,13 +110,16 @@ function App() {
   };
 
   const handleDeleteTask = async (column, taskId) => {
-    const response = await fetch("http://localhost:8000/deleteTask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ column, taskId }),
-    });
+    const response = await fetch(
+      "https://task-server-rouge.vercel.app/deleteTask",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ column, taskId }),
+      }
+    );
 
     if (response.ok) {
       setTasks((prevTasks) => ({
@@ -122,13 +130,16 @@ function App() {
   };
 
   const handleEditTask = async (column, taskId, name, description) => {
-    const response = await fetch("http://localhost:8000/editTask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ column, taskId, name, description }),
-    });
+    const response = await fetch(
+      "https://task-server-rouge.vercel.app/editTask",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ column, taskId, name, description }),
+      }
+    );
 
     if (response.ok) {
       setTasks((prevTasks) => ({
